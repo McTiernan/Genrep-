@@ -2,85 +2,216 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watch Authenticity Game - Spot the Genuine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="description" content="Test your eye for luxury watches. Can you spot the genuine from the replica? Play across 12 iconic brands.">
+    <meta name="theme-color" content="#0d0d1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WatchAuth">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Watch Authenticity Challenge">
+    <meta property="og:description" content="Can you spot the genuine luxury watch? Test your eye across Rolex, Patek Philippe, Omega, and more.">
+    <meta property="og:type" content="website">
+
+    <title>Watch Authenticity Challenge</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="favicon.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>⌚ Watch Authenticity Challenge</h1>
-            <p class="tagline">Can you spot the genuine luxury watch?</p>
-        </header>
 
-        <div class="game-info">
-            <div class="score-board">
-                <div class="score-item">
-                    <span class="label">Score:</span>
-                    <span id="score" class="value">0</span>
-                </div>
-                <div class="score-item">
-                    <span class="label">Round:</span>
-                    <span id="round" class="value">1</span>
-                </div>
-                <div class="score-item">
-                    <span class="label">Accuracy:</span>
-                    <span id="accuracy" class="value">0%</span>
-                </div>
+        <!-- ========== START SCREEN ========== -->
+        <div id="start-screen" class="start-screen">
+            <div class="logo">
+                <span class="logo-icon" role="img" aria-label="watch">&#9201;</span>
+                <h1>Watch Authenticity<br>Challenge</h1>
+                <p class="tagline">Can you spot the genuine luxury watch?</p>
+            </div>
+
+            <div class="best-score-card">
+                <span class="label">Best Score</span>
+                <span class="score-value" id="best-score-display">0</span>
+            </div>
+
+            <div class="mode-selection">
+                <h3>Choose Mode</h3>
+
+                <button class="mode-btn" data-mode="classic">
+                    <span class="mode-icon">&#127942;</span>
+                    <div class="mode-info">
+                        <div class="mode-name">Classic</div>
+                        <div class="mode-desc">12 rounds across all brands</div>
+                    </div>
+                </button>
+
+                <button class="mode-btn" data-mode="timeAttack">
+                    <span class="mode-icon">&#9201;</span>
+                    <div class="mode-info">
+                        <div class="mode-name">Time Attack</div>
+                        <div class="mode-desc">90 seconds, max score</div>
+                    </div>
+                </button>
+
+                <button class="mode-btn" data-mode="endless">
+                    <span class="mode-icon">&#8734;</span>
+                    <div class="mode-info">
+                        <div class="mode-name">Endless</div>
+                        <div class="mode-desc">Keep going until you quit</div>
+                    </div>
+                </button>
+            </div>
+
+            <div class="start-footer">
+                <button class="sound-toggle" id="sound-btn">Sound: ON</button>
+                <p class="how-to-play">Two watches side by side. One is genuine, one has subtle replica defects. Tap the one you think is real. Build streaks for bonus multipliers.</p>
             </div>
         </div>
 
-        <div id="brand-info" class="brand-info">
-            <h2 id="current-brand"></h2>
-            <p id="current-model"></p>
-        </div>
+        <!-- ========== GAME SCREEN ========== -->
+        <div id="game-screen" class="game-screen hidden">
 
-        <div class="game-container">
-            <div class="watch-option" id="watch-left">
-                <div class="image-container">
-                    <img id="image-left" src="" alt="Watch Option A" />
-                    <div class="image-overlay">
-                        <span class="option-label">Option A</span>
+            <!-- Stats bar -->
+            <div class="game-top-bar">
+                <div class="stats-row">
+                    <div class="stat">
+                        <span class="stat-label">Score</span>
+                        <span class="stat-value" id="score">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Round</span>
+                        <span class="stat-value" id="round">1</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Streak</span>
+                        <span class="stat-value" id="streak">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Multi</span>
+                        <span class="stat-value" id="multiplier">1x</span>
                     </div>
                 </div>
-                <button class="select-btn" id="select-left">Select This Watch</button>
             </div>
 
-            <div class="vs-divider">
-                <span>VS</span>
-            </div>
-
-            <div class="watch-option" id="watch-right">
-                <div class="image-container">
-                    <img id="image-right" src="" alt="Watch Option B" />
-                    <div class="image-overlay">
-                        <span class="option-label">Option B</span>
-                    </div>
+            <!-- Progress -->
+            <div class="progress-container">
+                <div class="progress-track">
+                    <div class="progress-bar" id="progress-bar"></div>
                 </div>
-                <button class="select-btn" id="select-right">Select This Watch</button>
+                <div class="progress-text" id="progress-text">0 of 12</div>
+            </div>
+
+            <!-- Timer (time attack only) -->
+            <div id="timer-container" class="timer-container hidden">
+                <div class="timer-display">
+                    <span class="timer-icon">&#9201;</span>
+                    <span class="timer-value" id="timer">90</span>
+                </div>
+                <div class="timer-track">
+                    <div class="timer-bar" id="timer-bar"></div>
+                </div>
+            </div>
+
+            <!-- Brand info -->
+            <div class="brand-info">
+                <h2 id="current-brand"></h2>
+                <p id="current-model"></p>
+            </div>
+
+            <!-- Watch comparison -->
+            <div class="game-container">
+                <div class="watch-option" id="watch-left" role="button" tabindex="0" aria-label="Select Watch A">
+                    <div class="option-header">
+                        <span class="option-label">Watch A</span>
+                        <span class="option-status"></span>
+                    </div>
+                    <div class="image-container">
+                        <img id="image-left" src="" alt="Watch A" draggable="false">
+                    </div>
+                    <div class="select-label">Tap to Select</div>
+                </div>
+
+                <div class="watch-option" id="watch-right" role="button" tabindex="0" aria-label="Select Watch B">
+                    <div class="option-header">
+                        <span class="option-label">Watch B</span>
+                        <span class="option-status"></span>
+                    </div>
+                    <div class="image-container">
+                        <img id="image-right" src="" alt="Watch B" draggable="false">
+                    </div>
+                    <div class="select-label">Tap to Select</div>
+                </div>
+            </div>
+
+            <!-- Feedback -->
+            <div id="feedback" class="feedback hidden">
+                <div class="feedback-content">
+                    <span id="feedback-icon"></span>
+                    <p id="feedback-text"></p>
+                    <p id="feedback-detail"></p>
+                </div>
+                <div class="defect-reveal">
+                    <h4>Replica Defects Found</h4>
+                    <ul class="defect-list" id="defect-list"></ul>
+                </div>
+                <button id="next-btn" class="next-btn">Next Round &#8594;</button>
             </div>
         </div>
 
-        <div id="feedback" class="feedback hidden">
-            <div class="feedback-content">
-                <span id="feedback-icon"></span>
-                <p id="feedback-text"></p>
-                <p id="feedback-detail"></p>
+        <!-- ========== RESULT SCREEN ========== -->
+        <div id="result-screen" class="result-screen hidden">
+            <div class="result-header">
+                <h2>Game Complete</h2>
             </div>
-            <button id="next-btn" class="next-btn">Next Round →</button>
+
+            <div class="result-rating">
+                <div class="rating-stars" id="rating-stars"></div>
+                <div class="rating-title" id="final-rating"></div>
+            </div>
+
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="rs-label">Score</span>
+                    <span class="rs-value" id="final-score">0</span>
+                </div>
+                <div class="result-stat">
+                    <span class="rs-label">Accuracy</span>
+                    <span class="rs-value" id="final-accuracy">0%</span>
+                </div>
+                <div class="result-stat">
+                    <span class="rs-label">Best Streak</span>
+                    <span class="rs-value" id="final-streak">0</span>
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button class="btn btn-primary" id="play-again-btn">Play Again</button>
+                <button class="btn btn-secondary" id="share-btn">Share Results</button>
+            </div>
+
+            <div class="high-scores">
+                <h3>High Scores</h3>
+                <ul class="high-score-list" id="high-score-list"></ul>
+            </div>
         </div>
 
-        <div class="instructions">
-            <h3>How to Play</h3>
-            <ul>
-                <li>Two images will be shown - one genuine luxury watch and one replica</li>
-                <li>Study the details carefully: dial, hands, finishing, alignment, fonts</li>
-                <li>Click on the watch you believe is authentic</li>
-                <li>Test your knowledge across major brands: Rolex, Patek Philippe, Omega, JLC, and more!</li>
-            </ul>
-        </div>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+    </script>
 </body>
 </html>
