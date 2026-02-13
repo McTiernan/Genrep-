@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Authenticity Game - Spot the Genuine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⌚ Watch Authenticity Challenge</h1>
+            <p class="tagline">Can you spot the genuine luxury watch?</p>
+        </header>
+
+        <div class="game-info">
+            <div class="score-board">
+                <div class="score-item">
+                    <span class="label">Score:</span>
+                    <span id="score" class="value">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">Round:</span>
+                    <span id="round" class="value">1</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">Accuracy:</span>
+                    <span id="accuracy" class="value">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="brand-info" class="brand-info">
+            <h2 id="current-brand"></h2>
+            <p id="current-model"></p>
+        </div>
+
+        <div class="game-container">
+            <div class="watch-option" id="watch-left">
+                <div class="image-container">
+                    <img id="image-left" src="" alt="Watch Option A" />
+                    <div class="image-overlay">
+                        <span class="option-label">Option A</span>
+                    </div>
+                </div>
+                <button class="select-btn" id="select-left">Select This Watch</button>
+            </div>
+
+            <div class="vs-divider">
+                <span>VS</span>
+            </div>
+
+            <div class="watch-option" id="watch-right">
+                <div class="image-container">
+                    <img id="image-right" src="" alt="Watch Option B" />
+                    <div class="image-overlay">
+                        <span class="option-label">Option B</span>
+                    </div>
+                </div>
+                <button class="select-btn" id="select-right">Select This Watch</button>
+            </div>
+        </div>
+
+        <div id="feedback" class="feedback hidden">
+            <div class="feedback-content">
+                <span id="feedback-icon"></span>
+                <p id="feedback-text"></p>
+                <p id="feedback-detail"></p>
+            </div>
+            <button id="next-btn" class="next-btn">Next Round →</button>
+        </div>
+
+        <div class="instructions">
+            <h3>How to Play</h3>
+            <ul>
+                <li>Two images will be shown - one genuine luxury watch and one replica</li>
+                <li>Study the details carefully: dial, hands, finishing, alignment, fonts</li>
+                <li>Click on the watch you believe is authentic</li>
+                <li>Test your knowledge across major brands: Rolex, Patek Philippe, Omega, JLC, and more!</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
