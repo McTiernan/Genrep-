@@ -24,7 +24,18 @@ const watchDatabase = [
         lumeColor: "#c8e6c9",
         brandFont: "bold 14px serif",
         hints: "Check the cyclops magnification (2.5x on genuine), crown guard shape, and lume pip alignment on bezel",
-        difficulty: 1
+        difficulty: 1,
+        visualTells: [
+            "Cyclops lens magnification — genuine is exactly 2.5x, replicas under-magnify",
+            "Laser-etched crown at 6 o'clock on crystal — nearly invisible to the naked eye on gen",
+            "Ceramic bezel insert color depth and platinum-filled numerals",
+            "Rehaut engraving alignment — 'ROLEX' text perfectly centered between indices"
+        ],
+        expertNote: "The VSF (VS Factory) version is the benchmark replica. Its VS3235 movement is a visual clone of the genuine, making caseback inspection difficult for novices.",
+        sources: {
+            genuine: "https://www.youtube.com/watch?v=UtRSHKqOIUc",
+            replica: "https://www.youtube.com/watch?v=UtRSHKqOIUc"
+        }
     },
     {
         brand: "Rolex",
@@ -68,7 +79,18 @@ const watchDatabase = [
         lumeColor: "#e8eaf6",
         brandFont: "bold 12px serif",
         hints: "Examine the tachymeter bezel engravings and subdial spacing",
-        difficulty: 2
+        difficulty: 2,
+        visualTells: [
+            "Dial color warmth — genuine 'Panda' has a slightly warm cream, replicas are pure white",
+            "Ceramic bezel font thickness — replicas are often slightly bolder",
+            "Chronograph pusher travel distance differs on replicas",
+            "Subdial register spacing and depth perception"
+        ],
+        expertNote: "Use the 'Three Point Check': 1. Dial warmth. 2. Chronograph pusher travel distance. 3. Bezel font thickness (reps are often slightly bolder).",
+        sources: {
+            genuine: "https://wristcheck.com/discover/watch-101/rolex-daytona-real-vs-fake",
+            replica: "https://wristcheck.com/discover/watch-101/rolex-daytona-real-vs-fake"
+        }
     },
     {
         brand: "Patek Philippe",
@@ -91,7 +113,18 @@ const watchDatabase = [
         brandFont: "bold 11px serif",
         texturePattern: "horizontal",
         hints: "Study the horizontal embossed texture on the dial and bracelet link finishing",
-        difficulty: 2
+        difficulty: 2,
+        visualTells: [
+            "Gradient blue dial — fakes often lean too purple or too grey",
+            "Horizontal embossed dial texture depth and uniformity",
+            "Case 'ears' shape and finishing transitions between brushed and polished",
+            "Bracelet link finishing precision — genuine has mirror-sharp edges"
+        ],
+        expertNote: "The 5711 is one of the most faked watches in the world. The gradient blue dial is notoriously difficult to replicate; fakes often lean too purple or too grey.",
+        sources: {
+            genuine: "https://www.watchfinder.com/articles/feature-real-100-000-patek-philippe-vs-1-000-fake",
+            replica: "https://www.watchfinder.com/articles/feature-real-100-000-patek-philippe-vs-1-000-fake"
+        }
     },
     {
         brand: "Omega",
@@ -114,7 +147,18 @@ const watchDatabase = [
         brandFont: "bold 12px sans-serif",
         texturePattern: "wave",
         hints: "Check the wave pattern on the dial and the helium escape valve at 10 o'clock",
-        difficulty: 2
+        difficulty: 2,
+        visualTells: [
+            "Wave pattern dial texture — laser-etched on genuine, printed or shallow on replicas",
+            "Helium escape valve at 10 o'clock — shape and proportion",
+            "Black balance wheel visible through caseback — replicas have silver/gold",
+            "Ceramic bezel enamel-filled numerals — depth and color consistency"
+        ],
+        expertNote: "VSF replicas of the Seamaster are extremely accurate externally (case and dial), making movement inspection (specifically the black balance wheel) the primary method of verification.",
+        sources: {
+            genuine: "https://millenarywatches.com/how-spot-fake-omega/",
+            replica: "https://www.youtube.com/watch?v=5rtkz-_f29s"
+        }
     },
     {
         brand: "Omega",
@@ -225,7 +269,18 @@ const watchDatabase = [
         lumeColor: "#e8eaf6",
         brandFont: "bold 9px serif",
         hints: "Look at the Art Deco numeral style and the precision of the Reverso case lines",
-        difficulty: 3
+        difficulty: 3,
+        visualTells: [
+            "Flipping case mechanism — genuine is smooth and precise with a satisfying click",
+            "Case lines and edge sharpness — genuine has razor-sharp transitions",
+            "Art Deco numeral engraving depth and consistency",
+            "Caseback engraving quality — replicas show rough or shallow etching"
+        ],
+        expertNote: "Reverso fakes are generally lower quality than Rolex/Patek super-clones due to the complexity of the flipping case mechanism. The mechanism feel alone is often a giveaway.",
+        sources: {
+            genuine: "https://www.youtube.com/watch?v=Zyr0ev9zEcM",
+            replica: "https://www.youtube.com/watch?v=Zyr0ev9zEcM"
+        }
     },
     {
         brand: "Patek Philippe",
@@ -248,6 +303,73 @@ const watchDatabase = [
         brandFont: "bold 10px serif",
         hints: "Study the Breguet numeral engraving depth and the Calatrava cross logo detail",
         difficulty: 3
+    },
+    {
+        brand: "Patek Philippe",
+        model: "Aquanaut 5167A",
+        caseShape: "round",
+        dialColor: "#263238",
+        dialGradient: "#37474f",
+        bezelType: "smooth",
+        bezelColor: "#b0bec5",
+        bezelAccent: "#cfd8dc",
+        markerStyle: "baton",
+        handStyle: "dauphine",
+        handColor: "#f5f5f5",
+        hasDate: true,
+        datePosition: 3,
+        hasCyclops: false,
+        crownGuards: false,
+        subDials: [],
+        lumeColor: "#b2dfdb",
+        brandFont: "bold 11px serif",
+        texturePattern: "tapisserie",
+        hints: "Check how the rubber strap meets the case — genuine has zero gap",
+        difficulty: 2,
+        visualTells: [
+            "Rubber strap-to-case fit — genuine has zero gap, replicas show a hairline space",
+            "Dial embossed 'grenade' pattern depth and uniformity",
+            "Arabic numeral font weight and spacing",
+            "Caseback Calatrava cross detail and finishing"
+        ],
+        expertNote: "The ZF factory version is common. Pay close attention to how the rubber strap meets the case; genuine straps have zero gap, while reps often show a hairline space.",
+        sources: {
+            genuine: "https://www.youtube.com/watch?v=q6_Sp6NHkRA",
+            replica: "https://www.youtube.com/watch?v=q6_Sp6NHkRA"
+        }
+    },
+    {
+        brand: "Jaeger-LeCoultre",
+        model: "Master Ultra Thin Moon",
+        caseShape: "round",
+        dialColor: "#eceff1",
+        dialGradient: "#f5f5f5",
+        bezelType: "smooth",
+        bezelColor: "#c0c0c0",
+        bezelAccent: "#e0e0e0",
+        markerStyle: "baton",
+        handStyle: "dauphine",
+        handColor: "#222",
+        hasDate: true,
+        datePosition: 3,
+        hasCyclops: false,
+        crownGuards: false,
+        subDials: [6],
+        lumeColor: "#e8eaf6",
+        brandFont: "bold 10px serif",
+        hints: "Listen to the rotor — genuine is near-silent, replicas use a loud Miyota 9015",
+        difficulty: 3,
+        visualTells: [
+            "Moon phase disc detail — genuine has a textured, star-filled sky",
+            "Rotor noise — genuine is near-silent, replicas use a famously loud Miyota 9015",
+            "Dial printing crispness — 'Jaeger-LeCoultre' text should be razor-sharp",
+            "Case thickness — replicas are often slightly thicker due to movement swap"
+        ],
+        expertNote: "This model is often replicated using a modified Miyota 9015 movement, which is famously loud. If the rotor makes a noisy 'whirring' sound when spun, it is likely a fake.",
+        sources: {
+            genuine: "https://imgur.com/a/KUcptI9",
+            replica: "https://www.reddit.com/r/Watches/comments/6zufay/jlc_fake_discussion_some_pretty_scary_side_by/"
+        }
     },
     {
         brand: "TAG Heuer",
@@ -1582,6 +1704,12 @@ class Game {
             feedbackText: document.getElementById('feedback-text'),
             feedbackDetail: document.getElementById('feedback-detail'),
             defectList: document.getElementById('defect-list'),
+            visualTells: document.getElementById('visual-tells'),
+            visualTellsSection: document.getElementById('visual-tells-section'),
+            expertNote: document.getElementById('expert-note'),
+            expertNoteSection: document.getElementById('expert-note-section'),
+            learnMoreLink: document.getElementById('learn-more-link'),
+            learnMoreSection: document.getElementById('learn-more-section'),
             nextBtn: document.getElementById('next-btn'),
             soundBtn: document.getElementById('sound-btn'),
             progressBar: document.getElementById('progress-bar'),
@@ -1807,6 +1935,7 @@ class Game {
 
     _showFeedback(isCorrect) {
         const { elements, state } = this;
+        const watch = state.currentWatch;
         elements.feedback.classList.remove('hidden', 'correct', 'incorrect');
 
         if (isCorrect) {
@@ -1815,7 +1944,7 @@ class Game {
             const streakText = state.streak >= 3 ? ` ${state.streak}x Streak!` : '';
             elements.feedbackText.textContent = `Correct!${streakText}`;
             const points = Math.round(100 * state.multiplier);
-            elements.feedbackDetail.textContent = `+${points} points | ${state.currentWatch.brand} ${state.currentWatch.model} authenticated.`;
+            elements.feedbackDetail.textContent = `+${points} points | ${watch.brand} ${watch.model} authenticated.`;
 
             if (state.multiplier > 1) {
                 elements.feedbackDetail.textContent += ` (${state.multiplier}x multiplier!)`;
@@ -1824,7 +1953,7 @@ class Game {
             elements.feedback.classList.add('incorrect');
             elements.feedbackIcon.textContent = '✗';
             elements.feedbackText.textContent = 'Not Quite!';
-            elements.feedbackDetail.textContent = state.currentWatch.hints;
+            elements.feedbackDetail.textContent = watch.hints;
         }
 
         // Show defects found
@@ -1835,6 +1964,36 @@ class Game {
             li.textContent = d.description;
             defectListEl.appendChild(li);
         });
+
+        // Show visual tells (real authentication knowledge)
+        const tellsEl = elements.visualTells;
+        tellsEl.innerHTML = '';
+        if (watch.visualTells && watch.visualTells.length > 0) {
+            elements.visualTellsSection.classList.remove('hidden');
+            watch.visualTells.forEach(tell => {
+                const li = document.createElement('li');
+                li.textContent = tell;
+                tellsEl.appendChild(li);
+            });
+        } else {
+            elements.visualTellsSection.classList.add('hidden');
+        }
+
+        // Show expert note
+        if (watch.expertNote) {
+            elements.expertNote.textContent = watch.expertNote;
+            elements.expertNoteSection.classList.remove('hidden');
+        } else {
+            elements.expertNoteSection.classList.add('hidden');
+        }
+
+        // Show learn more link
+        if (watch.sources && watch.sources.genuine) {
+            elements.learnMoreLink.href = watch.sources.genuine;
+            elements.learnMoreSection.classList.remove('hidden');
+        } else {
+            elements.learnMoreSection.classList.add('hidden');
+        }
 
         this.sound.play('reveal');
 
