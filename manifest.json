@@ -1,0 +1,19 @@
+{
+    "name": "Watch Authenticity Challenge",
+    "short_name": "WatchAuth",
+    "description": "Can you spot the genuine luxury watch? Test your eye across 12 iconic brands.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#0d0d1a",
+    "theme_color": "#0d0d1a",
+    "icons": [
+        {
+            "src": "favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["games", "entertainment", "education"]
+}
