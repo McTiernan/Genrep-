@@ -7,6 +7,7 @@ const watchDatabase = [
     {
         brand: "Rolex",
         model: "Submariner 116610LN",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/The_Rolex_Submariner_Professional.JPG?width=600",
         caseShape: "round",
         dialColor: "#0a0a0a",
         dialGradient: "#1a1a1a",
@@ -40,6 +41,7 @@ const watchDatabase = [
     {
         brand: "Rolex",
         model: "Datejust 41",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rolex_Datejust.JPG?width=600",
         caseShape: "round",
         dialColor: "#1a237e",
         dialGradient: "#283593",
@@ -62,6 +64,7 @@ const watchDatabase = [
     {
         brand: "Rolex",
         model: "Daytona 116500LN",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Detailed_view_of_Rolex_Daytona_chronograph_watch_and_watchstrap.jpg?width=600",
         caseShape: "round",
         dialColor: "#fafafa",
         dialGradient: "#f0f0f0",
@@ -95,6 +98,7 @@ const watchDatabase = [
     {
         brand: "Patek Philippe",
         model: "Nautilus 5711/1A",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Patek-Philippe-Nautilus-5711-1A-010-1.jpg?width=600",
         caseShape: "round",
         dialColor: "#1a237e",
         dialGradient: "#0d47a1",
@@ -129,6 +133,7 @@ const watchDatabase = [
     {
         brand: "Omega",
         model: "Seamaster 300M",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Omega_Seamaster_James_Bond_No_Time_to_Die.jpg?width=600",
         caseShape: "round",
         dialColor: "#0d47a1",
         dialGradient: "#1565c0",
@@ -163,6 +168,7 @@ const watchDatabase = [
     {
         brand: "Omega",
         model: "Speedmaster Professional",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/OMEGA_Speedmaster_CK2915.JPG?width=600",
         caseShape: "round",
         dialColor: "#1a1a1a",
         dialGradient: "#2a2a2a",
@@ -185,6 +191,7 @@ const watchDatabase = [
     {
         brand: "Audemars Piguet",
         model: "Royal Oak 15400ST",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Audemars_2385_Royal_Oak_resized.jpg?width=600",
         caseShape: "octagonal",
         dialColor: "#1a237e",
         dialGradient: "#283593",
@@ -230,6 +237,7 @@ const watchDatabase = [
     {
         brand: "IWC",
         model: "Pilot Mark XVIII",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/IWC_Big_Pilot_St_Exupery_Edition_(cropped).jpg?width=600",
         caseShape: "round",
         dialColor: "#1a1a1a",
         dialGradient: "#2a2a2a",
@@ -252,6 +260,7 @@ const watchDatabase = [
     {
         brand: "Jaeger-LeCoultre",
         model: "Reverso Classic",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Jaeger-LeCoultre-Reverso.jpg?width=600",
         caseShape: "rectangle",
         dialColor: "#fafafa",
         dialGradient: "#f0f0f0",
@@ -405,6 +414,66 @@ const DEFECT_TYPES = [
     { id: 'lume_color', label: 'Lume color wrong', description: 'The luminous material color is not quite right' },
     { id: 'bezel_align', label: 'Bezel alignment off', description: 'Bezel markings are slightly misaligned' },
     { id: 'crown_size', label: 'Crown proportion', description: 'The crown is slightly too large or small' }
+];
+
+// Image-specific defects (CSS filter-based for real photo manipulation)
+const IMAGE_DEFECT_TYPES = [
+    {
+        id: 'color_shift',
+        label: 'Dial color off',
+        description: 'The dial color doesn\'t match the genuine — common in replicas',
+        getFilter: (intensity) => `hue-rotate(${3 + intensity * 2}deg)`,
+        getTransform: () => ''
+    },
+    {
+        id: 'warm_shift',
+        label: 'Metal tone wrong',
+        description: 'The case/bracelet metal tone is warmer than genuine',
+        getFilter: (intensity) => `sepia(${0.05 + intensity * 0.03})`,
+        getTransform: () => ''
+    },
+    {
+        id: 'finish_quality',
+        label: 'Surface finish different',
+        description: 'The finishing appears less refined — typical of replica polishing',
+        getFilter: (intensity) => `brightness(${0.96 - intensity * 0.01}) contrast(${1.03 + intensity * 0.01})`,
+        getTransform: () => ''
+    },
+    {
+        id: 'oversaturated',
+        label: 'Colors oversaturated',
+        description: 'Colors appear slightly more vivid than genuine — cheap dial paint',
+        getFilter: (intensity) => `saturate(${1.1 + intensity * 0.05})`,
+        getTransform: () => ''
+    },
+    {
+        id: 'alignment_off',
+        label: 'Bezel/dial misaligned',
+        description: 'Components appear slightly rotated — an assembly defect',
+        getFilter: () => '',
+        getTransform: (intensity) => `rotate(${0.4 + intensity * 0.2}deg)`
+    },
+    {
+        id: 'proportion_wrong',
+        label: 'Case proportions off',
+        description: 'The case dimensions are subtly different from genuine',
+        getFilter: () => '',
+        getTransform: (intensity) => `scale(${1.01 + intensity * 0.005}, ${1 - intensity * 0.003})`
+    },
+    {
+        id: 'less_sharp',
+        label: 'Details lack crispness',
+        description: 'Engravings and text appear less sharp — poor quality control',
+        getFilter: (intensity) => `blur(${0.3 + intensity * 0.1}px)`,
+        getTransform: () => ''
+    },
+    {
+        id: 'lume_brightness',
+        label: 'Lume application uneven',
+        description: 'The luminous material appears differently from genuine',
+        getFilter: (intensity) => `brightness(${1.04 + intensity * 0.02}) hue-rotate(${-2 - intensity}deg)`,
+        getTransform: () => ''
+    }
 ];
 
 // ============================================================
@@ -1695,6 +1764,7 @@ class Game {
             timerContainer: document.getElementById('timer-container'),
             currentBrand: document.getElementById('current-brand'),
             currentModel: document.getElementById('current-model'),
+            photoBadge: document.getElementById('photo-badge'),
             imageLeft: document.getElementById('image-left'),
             imageRight: document.getElementById('image-right'),
             watchLeft: document.getElementById('watch-left'),
@@ -1845,27 +1915,69 @@ class Game {
         state.currentWatch = availableWatches[randomIndex];
         state.usedWatches.push(state.currentWatch);
 
-        // Generate defects for replica
-        state.currentDefects = DefectGenerator.generate(state.currentWatch.difficulty, state.round);
-
         // Randomly position genuine
         state.genuinePosition = Math.random() < 0.5 ? 'left' : 'right';
 
-        // Render watch images
-        const genuineImg = this.renderer.render(state.currentWatch, []);
-        const replicaImg = this.renderer.render(state.currentWatch, state.currentDefects);
+        const watch = state.currentWatch;
+        const genuineEl = state.genuinePosition === 'left' ? elements.imageLeft : elements.imageRight;
+        const replicaEl = state.genuinePosition === 'left' ? elements.imageRight : elements.imageLeft;
 
-        if (state.genuinePosition === 'left') {
-            elements.imageLeft.src = genuineImg;
-            elements.imageRight.src = replicaImg;
+        // Reset any previous CSS filters/transforms
+        elements.imageLeft.style.filter = '';
+        elements.imageLeft.style.transform = '';
+        elements.imageRight.style.filter = '';
+        elements.imageRight.style.transform = '';
+        elements.watchLeft.classList.remove('loading-image');
+        elements.watchRight.classList.remove('loading-image');
+
+        if (watch.imageUrl) {
+            // Use real photo with CSS-based defects
+            const imageDefects = this._generateImageDefects(watch.difficulty, state.round);
+            state.currentDefects = imageDefects.defectDescriptions;
+
+            // Show loading state
+            elements.watchLeft.classList.add('loading-image');
+            elements.watchRight.classList.add('loading-image');
+
+            // Set genuine image (no modifications)
+            genuineEl.onload = () => {
+                genuineEl.closest('.watch-option').classList.remove('loading-image');
+            };
+            genuineEl.onerror = () => {
+                // Fallback to canvas on load failure (genuine = no defects)
+                this._fallbackToCanvas(watch, false, [], genuineEl);
+            };
+            genuineEl.src = watch.imageUrl;
+
+            // Set replica image (same photo, CSS defects applied)
+            replicaEl.style.filter = imageDefects.filter;
+            replicaEl.style.transform = imageDefects.transform;
+            replicaEl.onload = () => {
+                replicaEl.closest('.watch-option').classList.remove('loading-image');
+            };
+            replicaEl.onerror = () => {
+                // Fallback to canvas on load failure (replica = with defects)
+                state.currentDefects = DefectGenerator.generate(watch.difficulty, state.round);
+                this._fallbackToCanvas(watch, true, state.currentDefects, replicaEl);
+            };
+            replicaEl.src = watch.imageUrl;
         } else {
-            elements.imageLeft.src = replicaImg;
-            elements.imageRight.src = genuineImg;
+            // Fallback: use canvas renderer
+            genuineEl.onload = null;
+            genuineEl.onerror = null;
+            replicaEl.onload = null;
+            replicaEl.onerror = null;
+            state.currentDefects = DefectGenerator.generate(watch.difficulty, state.round);
+            const genuineImg = this.renderer.render(watch, []);
+            const replicaImg = this.renderer.render(watch, state.currentDefects);
+            genuineEl.src = genuineImg;
+            replicaEl.src = replicaImg;
         }
 
         // Update brand info
         elements.currentBrand.textContent = state.currentWatch.brand;
         elements.currentModel.textContent = state.currentWatch.model;
+        elements.photoBadge.classList.toggle('hidden', !watch.imageUrl);
 
         // Update progress
         this._updateProgress();
@@ -2005,6 +2117,52 @@ class Game {
                 }
             }, 1500);
         }
+    }
+
+    _generateImageDefects(difficulty, round) {
+        // Select 2-4 image defects based on difficulty
+        const count = Math.min(2 + Math.floor(difficulty / 2), 4);
+        const intensity = Math.min(difficulty + Math.floor(round / 4), 4);
+
+        // Shuffle and pick defects
+        const shuffled = [...IMAGE_DEFECT_TYPES].sort(() => Math.random() - 0.5);
+        const selected = shuffled.slice(0, count);
+
+        // Build combined CSS filter and transform strings
+        const filters = [];
+        const transforms = [];
+        const defectDescriptions = [];
+
+        selected.forEach(defect => {
+            const f = defect.getFilter(intensity);
+            const t = defect.getTransform(intensity);
+            if (f) filters.push(f);
+            if (t) transforms.push(t);
+            defectDescriptions.push({
+                id: defect.id,
+                label: defect.label,
+                description: defect.description
+            });
+        });
+
+        return {
+            filter: filters.join(' '),
+            transform: transforms.join(' '),
+            defectDescriptions
+        };
+    }
+
+    _fallbackToCanvas(watch, isReplica, defects, imgEl) {
+        const canvasDefects = isReplica
+            ? (defects && defects.length > 0 ? defects : DefectGenerator.generate(watch.difficulty, this.state.round))
+            : [];
+        const imgData = this.renderer.render(watch, canvasDefects);
+        imgEl.style.filter = '';
+        imgEl.style.transform = '';
+        imgEl.onload = null;
+        imgEl.onerror = null;
+        imgEl.src = imgData;
+        imgEl.closest('.watch-option').classList.remove('loading-image');
     }
 
     _updateMultiplier() {

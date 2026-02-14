@@ -1,4 +1,4 @@
-const CACHE_NAME = 'watchauth-v1';
+const CACHE_NAME = 'watchauth-v2';
 const ASSETS = [
     '/',
     '/index.html',
@@ -37,10 +37,13 @@ self.addEventListener('fetch', (event) => {
                 if (cached) return cached;
                 return fetch(event.request)
                     .then(response => {
-                        if (!response || response.status !== 200) return response;
-                        const clone = response.clone();
-                        caches.open(CACHE_NAME)
-                            .then(cache => cache.put(event.request, clone));
+                        if (!response || response.status !== 200 || response.type === 'opaque') return response;
+                        // Only cache same-origin responses to avoid issues with external images
+                        if (new URL(event.request.url).origin === self.location.origin) {
+                            const clone = response.clone();
+                            caches.open(CACHE_NAME)
+                                .then(cache => cache.put(event.request, clone));
+                        }
                         return response;
                     })
                     .catch(() => {

@@ -387,6 +387,20 @@ body::before {
     font-weight: 400;
 }
 
+.photo-badge {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 2px 10px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--success);
+    border: 1px solid var(--success);
+    border-radius: 100px;
+    opacity: 0.85;
+}
+
 /* Watch comparison area */
 .game-container {
     display: grid;
@@ -479,6 +493,7 @@ body::before {
 .watch-option.incorrect .option-status::after { content: ''; opacity: 1; }
 
 .image-container {
+    position: relative;
     width: 100%;
     aspect-ratio: 1;
     border-radius: var(--radius);
@@ -492,6 +507,32 @@ body::before {
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: opacity 0.3s ease;
+}
+
+/* Loading state for real images */
+.watch-option.loading-image .image-container {
+    position: relative;
+}
+
+.watch-option.loading-image .image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.watch-option.loading-image .image-container img {
+    opacity: 0;
+}
+
+.watch-option:not(.loading-image) .image-container img {
+    opacity: 1;
 }
 
 .select-label {
